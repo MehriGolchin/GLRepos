@@ -1,2 +1,2 @@
 # GLRepository
-cours de GL
+cours de GenieLogiciel
