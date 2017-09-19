@@ -1,2 +1,2 @@
-# GLRepos
+# GLRepository
 cours de GL
