@@ -1,0 +1,73 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red53\green53\blue53;}
+{\*\expandedcolortbl;;\cssrgb\c27059\c27059\c27059;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab560
+\pard\pardeftab560\slleading20\partightenfactor0
+
+\f0\fs24 \cf2 import React, \{ Component \} from 'react';\
+import PropTypes from 'prop-types';\
+import \{ Row, Container, TextField, TextArea \} from '../../layout';\
+import \{ connect \} from 'react-redux';\
+import \{ createProject \} from '../../../store/actions';\
+\
+interface SignInState \{\
+    title: string;\
+    content: any;\
+\}\
+\
+interface SignInProps \{\
+    readonly createProject: any;\
+    readonly addChange: any;\
+\}\
+\
+class CreateProject extends Component<SignInProps, SignInState> \{\
+    constructor(props: SignInProps) \{\
+        super(props);\
+        this.state = \{\
+            title: '',\
+            content: ''\
+        \};\
+    \}\
+\
+    // handleChange = (event: any) => \{\
+    //     this.setState(\{\
+    //         [event.target.name]: event.target.value\
+    //     \} as any);\
+    // \}\
+\
+    handleSubmit = (event: any) => \{\
+        event.preventDefault();\
+        this.props.createProject(this.state);\
+    \}\
+\
+    render() \{\
+        const \{ title, content \} = this.state;\
+        return (\
+            <Container>\
+                <form onSubmit=\{this.handleSubmit\}>\
+                    <Row>\
+                        <TextField name="title" type="text" title="Title" value=\{title\} onChange=\{(newValue: any) => this.props.addChange('title', newValue)\}></TextField>\
+                    </Row>                    \
+                    <Row>\
+                        <TextArea name="content" title="Content" value=\{content\} onChange=\{(newValue: any) => this.props.addChange('content', newValue)\}></TextArea>\
+                    </Row>\
+                    <Row><button>Create</button></Row>\
+                </form>\
+            </Container>\
+        );\
+    \}\
+\}\
+\
+CreateProject.propTypes = \{\}\
+\
+const mapDispatchToProps = (dispatch: any) => \{\
+    return \{\
+        createProject: (project: any) => dispatch(createProject(project)),\
+        //handleChange: (event: any) => (\{[event.target.name]: event.target.value\})\
+    \}\
+\};\
+\
+export const CreateProjectContainer = connect(null, mapDispatchToProps)(CreateProject);\
+}
